@@ -2,11 +2,15 @@ import streamlit as st
 import joblib
 import numpy as np
 import pandas as pd
+import os
 
-# Load model
+if not os.path.exists("placement_model.pkl"):
+    import model
+
 model = joblib.load("placement_model.pkl")
 
 st.title("🎓 Student Placement Prediction System")
+
 
 cgpa = st.number_input("CGPA", 0.0, 10.0, 7.0)
 internships = st.number_input("Internships", 0, 10, 1)
@@ -32,3 +36,4 @@ st.write("### 📊 Placement Statistics")
 st.write("Total Students:", total)
 st.write("Placed Students:", placed)
 st.write("Placement Ratio: {:.2f}%".format((placed/total)*100))
+
